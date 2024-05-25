@@ -123,4 +123,4 @@ p_values = [calculate_p_value(s, background_scores) for s in best_scores]
 # Results
 print("Best motifs found with their p-values:")
 for motif, p_value in zip(best_motifs, p_values):
-    print(f"Motif: {motif}, P-value: {p_value}")
+    print(f"Motif: {motif}, P-value: {p_value:.10f}")
