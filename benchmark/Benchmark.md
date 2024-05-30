@@ -32,9 +32,8 @@ There are several hypothesized reasons why the Gibbs sampler program might retur
 It is worth noting that, to our surprise, we didn't find a commonly used established package/tool for Gibbs sampling-based motif finding implemented in python. 
 
 We use the `peaks_sequences.fa` file as sequence input to run RSAT, which outputs the following logos:
-
-![RSAT_logo_1](benchmark/RSAT_logos/RSAT_logo_1.png)
-
-![RSAT_logo_2](benchmark/RSAT_logos/RSAT_logo_2.png)
+|RSAT logos|Logo of our tool|
+|----------|----------------|
+|<img src="/benchmark/RSAT_logos/RSAT_logo_1.png" alt="RSAT_logo_1" width="450"/><img src="/benchmark/RSAT_logos/RSAT_logo_2.png" alt="RSAT_logo_2" width="450"/>||
 
 The rest of parameters can be found at the end of this benchmark session. 
