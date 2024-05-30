@@ -33,4 +33,8 @@ It is worth noting that, to our surprise, we didn't find a commonly used establi
 
 We use the `peaks_sequences.fa` file as sequence input to run RSAT, which outputs the following logos:
 
+![RSAT_logo_1](benchmark/RSAT logos/RSAT_logo_1)
+
+![RSAT_logo_2](benchmark/RSAT logos/RSAT_logo_1)
+
 The rest of parameters can be found at the end of this benchmark session. 
