@@ -32,8 +32,14 @@ There are several hypothesized reasons why the Gibbs sampler program might retur
 It is worth noting that, to our surprise, we didn't find a commonly used established package/tool for Gibbs sampling-based motif finding implemented in python. 
 
 We use the `peaks_sequences.fa` file as sequence input to run RSAT, which outputs the following logos:
-|RSAT logos|Logo of our tool|
+|RSAT logo|Logo of our tool|
 |----------|----------------|
-|<img src="/benchmark/RSAT_logos/RSAT_logo_1.png" alt="RSAT_logo_1" width="450"/><img src="/benchmark/RSAT_logos/RSAT_logo_2.png" alt="RSAT_logo_2" width="450"/>||
+|<img src="/benchmark/RSAT_logos/RSAT_logo_1motif_1site.png" alt="RSAT_logo_1" width="400"/>|<img src="/benchmark/RSAT_logos/our_logo_1motif_1site.png" alt="RSAT_logo_1" width="400"/>|
 
-The rest of parameters can be found at the end of this benchmark session. 
+Comparing the visualized logos produced by RSAT and our tool, we can see that the consensus bases at each position agree, despite the frequency distribution is different. Such comparison proves that our tool is accurate in finding the most probable motif with consensus with Gibbs sampling approach. 
+
+Parameters used to run RSAT are indicated below, feel free to play with it:
+|Sequence|Mask|Search both strands|Matrix length|Expected number of sites per sequence|Number of motif to extract|Maximum number of iterations|Number of runs|Background model|Output|
+|--------|----|-------------------|-------------|-------------------------------------|--------------------------|----------------------------|--------------|----------------|------|
+|`peaks_sequences.fa`|non-dna|True|8|1|1|1000|10|Estimated from input sequences|display|
+
