@@ -1,7 +1,7 @@
 ## Data information
 A BED file of ChIP sequencing, [`ENCFF221BLR.bed`](https://www.encodeproject.org/files/ENCFF221BLR/), was downloaded from the ENCODE platform. The biosample for obtaining the peak data is [*Homo sapiens* GM23338](https://www.encodeproject.org/biosamples/ENCBS368AAA/), and the sequencing was targeted to the STAT1 assay. 
 
-`bedtools` is incorporated to extract peak sequence segments from reference genome using coordinate information provided by bed file. For instance, with the two example files we mentioned above, the `bedtools` command is: `bedtools getfasta -fi hg38.fa -bed ENCFF221BLR.bed -fo peaks_sequences.fa`. 
+`bedtools` is incorporated to extract peak sequence segments from reference genome using coordinate information provided by bed file. For instance, with the two example files we mentioned above, the linux command used to run `bedtools` is: `bedtools getfasta -fi hg38.fa -bed ENCFF221BLR.bed -fo peaks_sequences.fa`. We handle this (i.e. we will run bedtools for you in our tool
 
 Where the ouput `peaks_sequences.fa` file was then used as the input for the Gibbs sampler program. When running for a k-mer length of 8, the output is:
 
@@ -37,6 +37,10 @@ We use the `peaks_sequences.fa` file as sequence input to run RSAT, which output
 |<img src="/benchmark/RSAT_logos/RSAT_logo_1motif_1site.png" alt="RSAT_logo_1" width="400"/>|<img src="/benchmark/RSAT_logos/our_logo_1motif_1site.png" alt="RSAT_logo_1" width="400"/>|
 
 Comparing the visualized logos produced by RSAT and our tool, we can see that the consensus bases at each position agree, despite the frequency distribution is different. Such comparison proves that our tool is accurate in finding the most probable motif with consensus with Gibbs sampling approach. 
+
+|RSAT runtime|Runtime of our tool|
+|------------|-------------------|
+|39.34s|4min41s|
 
 Parameters used to run RSAT are indicated below, feel free to play with it:
 |Sequence|Mask|Search both strands|Matrix length|Expected number of sites per sequence|Number of motif to extract|Maximum number of iterations|Number of runs|Background model|Output|
