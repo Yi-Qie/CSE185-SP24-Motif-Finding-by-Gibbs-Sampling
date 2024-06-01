@@ -56,9 +56,9 @@ A motif length of 8
 1000 iterations for the Gibbs sampler algorithm
 
 \
-To extract the peak regions from `fasta` reference genome using `bed` file information, you could use `bedtools` with the following command:
-
-`bedtools getfasta -fi <reference_genome_file.fa> -bed <bed_file.bed> -fo <output_peak_region.fa>`
+To extract the peak regions from `fasta` reference genome using `bed` file information, you could use `bedtools`:
+1. Install `bedtools` following [instruction](https://bedtools.readthedocs.io/en/latest/content/quick-start.html)
+2. Use `bedtools` with this command: `bedtools getfasta -fi <reference_genome_file.fa> -bed <bed_file.bed> -fo <output_peak_region.fa>`
 
 # Benchmark
 Please find our benchmark documentation [here](/benchmark/Benchmark.md). 
