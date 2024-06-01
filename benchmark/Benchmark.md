@@ -38,15 +38,16 @@ We use the `peaks_sequences.fa` file as sequence input to run RSAT, which output
 
 Comparing the visualized logos produced by RSAT and our tool, we can see that the consensus bases at each position agree, despite the frequency distribution is different. Such comparison proves that our tool is accurate in finding the most probable motif with consensus with Gibbs sampling approach. 
 
-|RSAT runtime|Runtime of our tool|
-|:----------:|:-----------------:|
-|39.34s|4min41s|
+## Runtime and Memory
+|HOMER runtime|RSAT runtime|Runtime of our tool|
+|:------------:|:----------:|:-----------------:|
+|5min54s|39.34s|4min41s|
 
-|RSAT memory usage|Memory usage of our tool|
-|:---------------:|:----------------------:|
-|44.1Mb|49.0Mb|
+|HOMER memory|RSAT memory usage|Memory usage of our tool|
+|:----------:|:---------------:|:----------------------:|
+|168.144Mb|44.1Mb|49.0Mb|
 
-Comparing to RSAT, our tool uses slightly more memory and takes a longer time to find similar consensus. 
+Comparing to RSAT, our tool uses slightly more memory and takes a longer time to find similar consensus. However, our tool shows significant advantages over HOMER, in terms of runtime and memory usage.
 
 Parameters used to run RSAT are indicated below, feel free to play with it:
 |Sequence|Mask|Search both strands|Matrix length|Expected number of sites per sequence|Number of motif to extract|Maximum number of iterations|Number of runs|Background model|Output|
