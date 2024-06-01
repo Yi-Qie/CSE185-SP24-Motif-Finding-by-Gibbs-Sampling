@@ -1,24 +1,66 @@
-# Gibbs Sampling Motif Finding
-## Gibbs Sampling
+# Gibbs Sampling Motif Finding (gsmf)
 Starting with a random selection of k-mers from the sequences, the Gibbs sampler we implemented iteratively refine this selection to converge on the most probable motifs. In each iteration, a profile matrix is created from the current set of motifs, excluding one sequence. This matrix represents the probabilities of each nucleotide at each position. Using this profile, a new k-mer is probabilistically selected for the excluded sequence based on its likelihood given the profile. This process is repeated, gradually reconfines the motifs by the probabilistic framework. By running the algorithm multiple times and using a background model to calculate p-values, the implementation aims to identify statistically significant motifs that are most representative of the biological signals.
 
+# Usage
+The gsmf (Gibbs Sampler Motif Finder) tool allows you to search for motifs in a set of DNA sequences using the Gibbs sampling algorithm. Below are the options and an example command to run the tool.
+
 ## Installation
+1. Clone the repository: `git clone https://github.com/yourusername/gsmf.git`
+2. Navigate to the project directory: `cd gsmf`
+3. Install the package: `pip install .`
+
+Once installed, you can use the gsmf command as indicated in the options session.
+
+Requirements
+Make sure you have the following dependencies installed:
+
+* Python 3.x
+* argparse module (usually included with Python)
+* random module (usually included with Python)
+* bedtools (if using bed file extraction functionality)
+
+### Installing dependencies:
+* Installing Python 3.x
+Check Python Version: First, check if Python is already installed on your system and its version. Open a terminal or command prompt and type: `python --version`. If Python is installed, the version number will be displayed. Ensure it is Python 3.x (e.g., 3.7, 3.8).
+
+If Python 3.x is not installed or if you need to update, download the latest version from the official Python website and follow the installation instructions for your operating system.
+
+* Installing argparse Module: The argparse module is included with Python, so no separate installation is required.
+
+* Installing random Module: The random module is also included with Python, so no separate installation is required.
+
+* Installing bedtools (Optional): If you intend to use the bed file extraction functionality, you will need to install bedtools. Follow these steps:
+1. Download bedtools: Visit the bedtools website and download the appropriate version for your operating system.
+2. Install bedtools: Follow the installation instructions provided for your operating system.
 
 
-## Usage
-This program is not yet developed to be a command-line executable utility. Therefore, to run this program, the myutils.py script has to be executed conventionally by using python myutils.py. To run the program as intended, the file location needs to be updated within the myutils.py script at line 105: fasta_file = "location/of/peakdatafile.fa". Parameters such as k, t, and n, corresponding to motif length, number of sequences, and number of iterations, can be varied to explore the resulting motifs.
+Once you have installed Python 3.x and, optionally, bedtools, you are ready to use the gsmf tool. Follow the instructions provided in the repository's README or documentation to clone the repository, install the package, and use the tool.
+
 
 ## Options
 The tool takes 5 mandatory input options:
 
-* `-bed`: the bed file which contains coordinates information of the motif you're interested in. It serves as the guide to extract sequences at specific locations from the reference genome;
-* `-fa`: the reference genome file which you would like to search motif from, please makesure it's in `fasta` format;
+* `-f`: specifies the path to the input FASTA file from which motifs will be searched, please make sure that you indicate a full path;
+
+Note that this should be the extracted peak regions of complete reference genome, you would find instruction for extraction with `bed` file and `fasta` reference genome file in the end of options section.
 * `-k`: length of the motif you're interested in;
 * `-t`: number of sequences you would like the tool to output, the tool will print `t` sequences that strongly agree with the motif consensus when it finishes motif searching;
 * `-n`: number of iterations you would like the tool to run, please note that for each iteration the algorithm would generate 1000 profile matrices by randomly replacing one of the motifs selected. We generally recommend `n` value below 1000, a larger value should also work but it is likely to take a longer time.
 
+**Example Command:** `gsmf -f peak_sequences.fasta -t 5 -k 8 -n 1000`
+This command will run the gsmf tool using:
 
-## Contributors
+The input FASTA file peak_sequences.fasta
+5 sequences to be used in the motif search process
+A motif length of 8
+1000 iterations for the Gibbs sampler algorithm
+
+\
+To extract the peak regions from `fasta` reference genome using `bed` file information, you could use `bedtools` with the following command:
+
+`bedtools getfasta -fi <reference_genome_file.fa> -bed <bed_file.bed> -fo <output_peak_region.fa>`
+
+# Contributors
 This repository was created as part of a coursework project for CSE 185 Advanced Bioinformatics Lab at University of California San Diego. We would like to acknowledge the efforts and contributions of the following team members:
 
 - **Qie Yi** - Contributed to data analysis, main algorithm implementation, and documentation.
