@@ -60,6 +60,9 @@ To extract the peak regions from `fasta` reference genome using `bed` file infor
 
 `bedtools getfasta -fi <reference_genome_file.fa> -bed <bed_file.bed> -fo <output_peak_region.fa>`
 
+# Benchmark
+Please find our benchmark documentation [here](/benchmark/Benchmark.md). 
+
 # Contributors
 This repository was created as part of a coursework project for CSE 185 Advanced Bioinformatics Lab at University of California San Diego. We would like to acknowledge the efforts and contributions of the following team members:
 
