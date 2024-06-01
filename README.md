@@ -1,41 +1,76 @@
-# CSE185-SP24-Motif-Finding-by-Gibbs-Sampling
-## Implementation
+# Gibbs Sampling Motif Finding (gsmf)
 Starting with a random selection of k-mers from the sequences, the Gibbs sampler we implemented iteratively refine this selection to converge on the most probable motifs. In each iteration, a profile matrix is created from the current set of motifs, excluding one sequence. This matrix represents the probabilities of each nucleotide at each position. Using this profile, a new k-mer is probabilistically selected for the excluded sequence based on its likelihood given the profile. This process is repeated, gradually reconfines the motifs by the probabilistic framework. By running the algorithm multiple times and using a background model to calculate p-values, the implementation aims to identify statistically significant motifs that are most representative of the biological signals.
-## Usage
-This program is not yet developed to be a command-line executable utility. Therefore, to run this program, the myutils.py script has to be executed conventionally by using python myutils.py. To run the program as intended, the file location needs to be updated within the myutils.py script at line 105: fasta_file = "location/of/peakdatafile.fa". Parameters such as k, t, and n, corresponding to motif length, number of sequences, and number of iterations, can be varied to explore the resulting motifs.
-## Coarse Benchmarking
-A BED file of ChIP sequencing, `ENCFF221BLR.bed`, was downloaded from the ENCODE platform. The biosample for obtaining the peak data is *Homo sapiens* GM23338, and the sequencing was targeted to the STAT1 assay. The command `bedtools getfasta -fi hg38.fa -bed ENCFF221BLR.bed -fo peaks_sequences.fa` was used to extract the peak sequence segments from the reference *Homo sapiens* genome. The `peaks_sequences.fa` file was then used as the input for the Gibbs sampler program. When running for a k-mer length of 8, the output is:
 
-```bash
-Best motifs found:
-Motif: CCCCGCCC, P-value: 0.0000000000
-Motif: CCCCGCCC, P-value: 0.0000000000
-Motif: CTCCGCCC, P-value: 0.0000000000
-Motif: CCCCGCCC, P-value: 0.0000000000
-Motif: CCGCGGCC, P-value: 0.0000000000
-```
+# Usage
+The gsmf (Gibbs Sampler Motif Finder) tool allows you to search for motifs in a set of DNA sequences using the Gibbs sampling algorithm. Below are the options and an example command to run the tool.
 
-When running for a k-mer length of 14, the output is:
+## Installation
+1. Clone the repository: `git clone https://github.com/yourusername/gsmf.git`
+2. Navigate to the project directory: `cd gsmf`
+3. Install the package: `pip install .`
 
-```bash
-Best motifs found:
-Motif: CGGCAGGCCTGCCT, P-value: 0.0000000000
-Motif: CGCCCGCCCTGCCC, P-value: 0.0000000000
-Motif: CCCCTGGCCTACCC, P-value: 0.0000000000
-Motif: CCCCAGGCCTGCCC, P-value: 0.0000000000
-Motif: GGCCAGGAATGCCT, P-value: 0.0000000000
-```
+Once installed, you can use the gsmf command as indicated in the options session.
 
-However, variations were observed when these results were compared to the top-5 motif finding results by the HOMER tool:
+Requirements
+Make sure you have the following dependencies installed:
 
-```bash
-Motif: TTGGCCCCGCCCCC, P-value: 1e-22
-Motif: CTTCCCAG, P-value: 1e-10
-Motif: CAGCTCAG, P-value: 1e-8
-Motif: TTCAATTT, P-value: 1e-7
-Motif: TTCTTTTT, P-value: 1e-7
-```
+* Python 3.x
+* argparse module (usually included with Python)
+* random module (usually included with Python)
+* bedtools (if using bed file extraction functionality)
 
-There are several hypothesized reasons why the Gibbs sampler program might return different results compared to the HOMER tool. First, the underlying algorithms between the two tools differ; the Gibbs sampler relies on a probabilistic approach, while HOMER uses a deterministic approach based on position weight matrices (PWMs) and optimized scoring functions. This fundamental difference can lead to variations in the motifs identified. Second, the handling of background models and pseudocounts might differ between the tools, affecting the scoring and selection of motifs. Additionally, the initial conditions and random seed settings in the Gibbs sampler can introduce variability in the results, while HOMER might have more standardized or optimized initializations.
+### Installing dependencies:
+* Installing Python 3.x
+Check Python Version: First, check if Python is already installed on your system and its version. Open a terminal or command prompt and type: `python --version`. If Python is installed, the version number will be displayed. Ensure it is Python 3.x (e.g., 3.7, 3.8).
 
-To improve and confirm the validity of our program, we can run more tests on different samples with more iterations. This will help us eliminate errors in implementation and understand the real differences between motif-finding mechanisms. Finally, there are many samples available for calling methods, and benchmarking can be improved in the following weeks.
+If Python 3.x is not installed or if you need to update, download the latest version from the official Python website and follow the installation instructions for your operating system.
+
+* Installing argparse Module: The argparse module is included with Python, so no separate installation is required.
+
+* Installing random Module: The random module is also included with Python, so no separate installation is required.
+
+* Installing bedtools (Optional): If you intend to use the bed file extraction functionality, you will need to install bedtools. Follow these steps:
+1. Download bedtools: Visit the bedtools website and download the appropriate version for your operating system.
+2. Install bedtools: Follow the installation instructions provided for your operating system.
+
+
+Once you have installed Python 3.x and, optionally, bedtools, you are ready to use the gsmf tool. Follow the instructions provided in the repository's README or documentation to clone the repository, install the package, and use the tool.
+
+
+## Options
+The tool takes 5 mandatory input options:
+
+* `-f`: specifies the path to the input FASTA file from which motifs will be searched, please make sure that you indicate a full path;
+
+Note that this should be the extracted peak regions of complete reference genome, you would find instruction for extraction with `bed` file and `fasta` reference genome file in the end of options section.
+* `-k`: length of the motif you're interested in;
+* `-t`: number of sequences you would like the tool to output, the tool will print `t` sequences that strongly agree with the motif consensus when it finishes motif searching;
+* `-n`: number of iterations you would like the tool to run, please note that for each iteration the algorithm would generate 1000 profile matrices by randomly replacing one of the motifs selected. We generally recommend `n` value below 1000, a larger value should also work but it is likely to take a longer time.
+
+**Example Command:** `gsmf -f peak_sequences.fasta -t 5 -k 8 -n 1000`
+This command will run the gsmf tool using:
+
+The input FASTA file peak_sequences.fasta
+5 sequences to be used in the motif search process
+A motif length of 8
+1000 iterations for the Gibbs sampler algorithm
+
+\
+To extract the peak regions from `fasta` reference genome using `bed` file information, you could use `bedtools` with the following command:
+
+`bedtools getfasta -fi <reference_genome_file.fa> -bed <bed_file.bed> -fo <output_peak_region.fa>`
+
+# Benchmark
+Please find our benchmark documentation [here](/benchmark/Benchmark.md). 
+
+# Contributors
+This repository was created as part of a coursework project for CSE 185 Advanced Bioinformatics Lab at University of California San Diego. We would like to acknowledge the efforts and contributions of the following team members:
+
+- **Qie Yi** - Contributed to data analysis, main algorithm implementation, and documentation.
+- **Zhuoling Huang** - Contributed to testing, algorithm optimization, benchmarking and helped with code debugging.
+
+We are grateful for the guidance and support provided by our course instructor, Professor Melissa Gymrek, and teaching assistants, Divya Prabhu and Hao Xu.
+
+Special thanks to [ENCODE](https://www.encodeproject.org/) for providing test datasets, [HOMER](http://homer.ucsd.edu/homer/) and [RSAT](http://rsat.sb-roscoff.fr/) for benchmarking.
+
+For any questions or suggestions, please feel free to contact us.
