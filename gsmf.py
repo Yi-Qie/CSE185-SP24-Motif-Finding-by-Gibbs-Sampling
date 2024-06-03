@@ -123,7 +123,7 @@ def main():
         description="gsmf (Gibbs Sampler Motif Finder) is a command-line tool for identifying conserved motifs in DNA sequences using Gibbs sampling",
         usage="%(prog)s fasta_file [-h] -t [NUMBER OF TOP SEQUENCES FOUND] -k [MOTIF LENGTH] -n [ITERATIONS]"
     )
-    parser.add_argument('-f', required=True, help='Input FASTA file of peak regions')
+    parser.add_argument('-f', "--fasta", required=True, help='Input FASTA file of peak regions')
     parser.add_argument('-t', type=int, required=True, help='Number of sequences to be printed')
     parser.add_argument('-k', type=int, required=True, help='Length of motif to be found')
     parser.add_argument('-n', type=int, required=True, help='Number of iterations to be run')
