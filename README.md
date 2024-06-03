@@ -5,7 +5,7 @@ Starting with a random selection of k-mers from the sequences, the Gibbs sampler
 The gsmf (Gibbs Sampler Motif Finder) tool allows you to search for motifs in a set of DNA sequences using the Gibbs sampling algorithm. Below are the options and an example command to run the tool.
 
 ## Installation
-1. Clone the repository: `git clone https://github.com/yourusername/gsmf.git`
+1. Clone the repository: `git clone https://github.com/Yi-Qie/CSE185-SP24-Motif-Finding-by-Gibbs-Sampling.git`
 2. Navigate to the project directory: `cd gsmf`
 3. Install the package: `pip install .`
 
