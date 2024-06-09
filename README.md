@@ -6,7 +6,7 @@ The gsmf (Gibbs Sampler Motif Finder) tool allows you to search for motifs in a 
 
 ## Installation
 1. Clone the repository: `git clone https://github.com/Yi-Qie/CSE185-SP24-Motif-Finding-by-Gibbs-Sampling.git`
-2. Navigate to the project directory: `cd gsmf`
+2. Navigate to the project directory: `cd CSE185-SP24-Motif-Finding-by-Gibbs-Sampling`
 3. Install the package: `pip install .`
 
 Once installed, you can use the gsmf command as indicated in the options session.
@@ -48,14 +48,19 @@ Note that this should be the extracted peak regions of complete reference genome
 * `-t`: number of sequences you would like the tool to output, the tool will print `t` sequences that strongly agree with the motif consensus when it finishes motif searching;
 * `-n`: number of iterations you would like the tool to run, please note that for each iteration the algorithm would generate 1000 profile matrices by randomly replacing one of the motifs selected. We generally recommend `n` value below 1000, a larger value should also work but it is likely to take a longer time.
 
-**Example Command:** `gsmf -f peak_sequences.fasta -t 5 -k 8 -n 1000`
-This command will run the gsmf tool using:
+**Example Command:** `gsmf -f peaks_sequences.fasta -t 5 -k 8 -n 1000`
 
-The input FASTA file peak_sequences.fasta
-5 sequences to be used in the motif search process
-A motif length of 8
+This command will run the gsmf tool using: 
+
+The input FASTA file peaks_sequences.fasta \
+5 sequences to be used in the motif search process \
+A motif length of 8 \
 1000 iterations for the Gibbs sampler algorithm
 
+If you'd like to produce logo representation of the enriched sequences, feel free to use `logo_visualization.ipynb` in this repository. Copy and paste the motifs you found with gsmf to the variable `motifs` and run the cell, you should be able to see the logo! More detailed information about this code can be found in code comment. \
+We'd love to integrate this visualization into the main gsmf tool, but unfortunately did not have enough time to do so. 
+
+It's worth noting that, as a probabilistic approach, gsmf does not necessarily converge at each run. gsmf may produce different set of enriched sequences at each run, especially when number of iterations is small. \
 \
 To extract the peak regions from `fasta` reference genome using `bed` file information, you could use `bedtools`:
 1. Install `bedtools` following [instruction](https://bedtools.readthedocs.io/en/latest/content/quick-start.html)
