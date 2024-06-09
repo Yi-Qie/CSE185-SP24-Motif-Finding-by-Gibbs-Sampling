@@ -36,6 +36,7 @@ If Python 3.x is not installed or if you need to update, download the latest ver
 
 Once you have installed Python 3.x and, optionally, bedtools, you are ready to use the gsmf tool. Follow the instructions provided in the repository's README or documentation to clone the repository, install the package, and use the tool.
 
+Note: If the `gsmf` command was not found, you may need to run export `PATH=$PATH:/home/$USER/.local/bin` to include the script installation path in your $PATH.
 
 ## Options
 The tool takes 5 mandatory input options:
